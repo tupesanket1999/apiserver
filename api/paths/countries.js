@@ -54,7 +54,7 @@ const GET = async (req, res) => {
     res.send(result);
   } catch (error) {
     console.error(error);
-    res.status(502).send("Internal Server Error");
+    res.status(502).send(`Internal Server Error : ${error}`);
   }
 };
 module.exports = {
