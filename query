@@ -1,0 +1,13 @@
+docker run --name postgres -e POSTGRES_PASSWORD=bluesky -p 5432:5432 -d postgres
+CREATE DATABASE bluesky;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE TABLE IF NOT EXISTS green_house_gas (
+	id UUID NOT NULL DEFAULT uuid_generate_v4(),
+  year INTEGER, 
+  value float8,
+  country VARCHAR,
+  category VARCHAR,
+  createdAt TIMESTAMP DEFAULT now(),
+  updatedAt TIMESTAMP DEFAULT now()
+);
+COPY green_house_gas(country,year,value,category) FROM '/dataset/greenhouse.csv' csv header;
